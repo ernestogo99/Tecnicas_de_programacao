@@ -5,13 +5,13 @@ como objetivo utilizar e entender conceitos de programação orientada a objetos
 
 ## Destaques do projeto
 
--Gerenciamento de contas:Cadatras,buscar,listar,etc
--Há vários tipos de conta:ContaEspecial,imposto,poupança
--A conta especial pode render um bônus
--A conta imposto paga imposto ao debitar
--A conta poupança pode render juros
--Reutilização de código com herança
--Uso de conceitos da orientação a objetos
+- Gerenciamento de contas: cadastrar, buscar, listar, etc.
+- Vários tipos de conta: ContaEspecial, ContaImposto, Poupança.
+- A ContaEspecial pode render um bônus.
+- A ContaImposto paga imposto ao debitar.
+- A ContaPoupança pode render juros.
+- Reutilização de código com herança.
+- Uso de conceitos de orientação a objetos (POO).
 
 ## Como rodar o projeto
 
@@ -38,13 +38,13 @@ java Main
 
 ## Conceitos importantes
 
--Modificadores de acesso
--Herança
--Polimorfismo
--Classes Abstratas
--Classes
--Atributos
--Métodos
--Pacotes
--Casting
--Interface
+- Modificadores de acesso
+- Herança
+- Polimorfismo
+- Classes Abstratas
+- Classes
+- Atributos
+- Métodos
+- Pacotes
+- Casting
+- Interface

@@ -52,7 +52,7 @@ java Main
 # Classes
 
 Uma classe é um agrupamento de coisas similares, ela possui
-objetos que são algo com base na classe, e os métodos são
+atributos que são propriedades de um objeto, e os métodos são
 as ações que a classe pode sofrer ou realizar.
 
 exemplo:
@@ -246,3 +246,133 @@ como essa é uma classe abstrata, se tentarmos usar o comando:
 ContaAbstrata conta=new ContaAbstata();
 
 irá ocorrer um erro, pois a classe abstrata não pode ser instanciada.
+
+# Casting
+
+É o processo de converter um tipo de dado em outro
+
+exemplo:
+
+```java
+public void renderJuros(String numero) {
+		ContaAbstrata conta=this.procurar(numero);
+
+		if(conta instanceof Poupanca) {
+				((Poupanca) conta).renderJuros(this.taxajuros);
+		}else {
+			System.err.println("A conta não é do tipo poupanca");
+		}
+	}
+```
+
+o comando instanceof indica se Poupanca é uma instância de conta, ou seja,
+faz uma checagem de tipos.
+
+aqui estamos convertendo o tipo ContaAbstrata para poupanca, desta forma:
+((Poupanca) conta)
+
+# Interface
+
+Em Java, uma interface é um tipo especial que define um contrato: ela declara métodos que uma classe deve implementar, mas não contém a implementação desses métodos
+
+- Interface não é reutilizavel como a classe abstrata
+- Permite herança múltipla
+- Uma classe pode ter múltiplos subtipos implementados por mais de uma interface
+- ela padroniza comportamento em classes diferentes
+- Uma classe implementa uma interface, assim para utiliza-la usamos o comando implements
+
+exemplo:
+
+```java
+package org.example.repositorio;
+
+import java.util.Vector;
+
+import org.example.contas.ContaAbstrata;
+
+public interface IRepositorioContaVector {
+	public void inserir(ContaAbstrata conta);
+	public void remover(String numero);
+	public ContaAbstrata procurar(String numero);
+	public Vector<ContaAbstrata> listar();
+	public int tamanho();
+}
+
+```
+
+implementando a interface:
+
+```java
+package org.example.repositorio;
+
+import java.util.Vector;
+
+import org.example.contas.ContaAbstrata;
+
+public class RepositorioContaVector implements IRepositorioContaVector {
+	private Vector<ContaAbstrata> contas=new Vector<ContaAbstrata>();
+
+
+	public void inserir(ContaAbstrata conta) {
+		if(conta==null) {
+		    throw new IllegalArgumentException("Dados da conta não podem ser nulos.");
+		}
+		contas.add(conta);
+
+	}
+
+
+	public void remover(String numero) {
+		ContaAbstrata conta=this.procurar(numero);
+		if(conta!=null) {
+			contas.remove(conta);
+		}
+
+
+	}
+
+
+	public ContaAbstrata procurar(String numero) {
+		for(ContaAbstrata conta:contas) {
+			if(conta.numero().equals(numero)) {
+				return conta;
+			}
+		}
+		throw new RuntimeException("Conta com número: " + numero + " não encontrada.");
+
+
+	}
+
+
+	public Vector<ContaAbstrata> listar(){
+		if(this.contas.isEmpty()) {
+			throw new  RuntimeException("Nenhuma conta cadastrada.");
+		}
+		return this.contas;
+	}
+
+	public double saldototal() {
+		double saldoTotal=0.0;
+		if(this.contas.isEmpty()) {
+			throw new  RuntimeException("Nenhuma conta cadastrada.");
+		}
+		for(ContaAbstrata conta:contas){
+			saldoTotal+=conta.saldo();
+		}
+		return saldoTotal;
+	}
+
+	public int tamanho() {
+		if(this.contas.isEmpty()) {
+			throw new  RuntimeException("Nenhuma conta cadastrada.");
+		}
+		return this.contas.size();
+	}
+
+
+}
+
+```
+
+caso algum método do contrato não esteja implementado na classe, a IDE
+irá acusar um erro.

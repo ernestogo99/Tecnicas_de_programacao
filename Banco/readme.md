@@ -39,13 +39,13 @@ java Main
 ## Conceitos importantes
 
 - Classes
+- Pacotes
 - Modificadores de acesso
 - Herança
 - Polimorfismo
 - Classes Abstratas
 - Atributos
 - Métodos
-- Pacotes
 - Casting
 - Interface
 
@@ -77,7 +77,7 @@ public class Pessoa {
 }
 ```
 
-na classe pessoa temos os atributos ruambairro,cidade,cep,numero
+na classe pessoa temos os atributos rua,bairro,cidade,cep,numero
 e temos o método dizerOi.
 
 O método public Pessoa(int numero) é o construtor, que é utilizado para inicializar a classe.
@@ -87,6 +87,35 @@ podemos instanciar a classe pessoa dessa forma:
 Pessoa pessoa1= new Pessoa(2);
 
 perceba que precisamos passar o parametro no construtor, caso haja um.
+
+# Pacotes
+
+- Agrupam definições de classes relacionadas
+- Estrutura sistema de grande porte, facilita a localização de classes
+- Oferece um maior nível de abstração: há mais classes do que pacotes
+- nome do pacote deve ser minúsculo
+
+```java
+package org.example.contas;
+
+public class Conta extends ContaAbstrata {
+
+
+	public Conta(String numero) {
+		super(numero);
+	}
+
+	@Override
+	public void debitar(double valor) {
+		this.saldo-=valor;
+
+	}
+
+}
+```
+
+neste exemplo temos o pacote package org.example.contas;
+dentro dele podemos utilizar todas as contas, sem a necessidade de usar import.
 
 # Modificadores de acesso
 
@@ -166,7 +195,54 @@ public class Conta extends ContaAbstrata {
 ```
 
 Perceba que o método debitar da classe Conta e da contaImposto se comportam
-de maneira diferente, apesar de ser o mesmo método, que foi herdade e sobrescrito
+de maneira diferente, apesar de ser o mesmo método, que foi herdado e sobrescrito
 da classe Abstrata.
 
 A anotação @Override em Java serve para indicar que um método está sobrescrevendo (override) um método da superclasse ou de uma interface.
+
+# Classe abstrata
+
+É uma classe que não pode ser instanciada diretamente.
+Ela serve como molde para outras classes.
+Demos usa-lá quando quisermos:
+
+- Forçar subclasses a implementar certos métodos
+- Reaproveitar código base em várias classes parecidas
+- Quando a classe deve ser só herdada
+
+```java
+public abstract class ContaAbstrata {
+	protected String numero;
+	protected double saldo;
+
+	public ContaAbstrata(String numero) {
+		this.numero=numero;
+		this.saldo=0;
+	}
+
+
+	public void creditar(double valor) {
+		this.saldo+=valor;
+	}
+
+	public abstract void debitar(double valor);
+
+	public String numero() {
+		return this.numero;
+	}
+
+	public double saldo() {
+		return this.saldo;
+	}
+}
+```
+
+perceba que nessa classe há um método abstrato, ou seja, ele deve ser
+implementado nas classes que serão herdadas, mas não necessariamente
+deve ser implementado na classe abstrata.
+
+como essa é uma classe abstrata, se tentarmos usar o comando:
+
+ContaAbstrata conta=new ContaAbstata();
+
+irá ocorrer um erro, pois a classe abstrata não pode ser instanciada.

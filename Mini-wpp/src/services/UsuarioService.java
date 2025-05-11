@@ -13,12 +13,9 @@ public class UsuarioService {
             throw  new IllegalArgumentException("Dados do usuário não podem ser nulos");
         }
 
-        Usuario novoUsuario= new Usuario(
-                data.getNome(),
-                data.getNumero()
-        );
-        usuarios.add(novoUsuario);
-        return novoUsuario;
+
+        usuarios.add(data);
+        return data;
     }
 
     public Usuario buscarUsuarioPorNumero(int numero){

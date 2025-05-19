@@ -4,8 +4,8 @@ public class Xarope extends Medicamento {
     private final String tipo= "Xarope";
 
 
-    public Xarope(String nome,int quantidade,Number frequencia,String unidadeDemedida){
-        super(nome,quantidade,frequencia,unidadeDemedida);
+    public Xarope(String nome,int quantidade,Number frequencia,String unidadeDemedida,int grauDeseguranca){
+        super(nome,quantidade,frequencia,unidadeDemedida,grauDeseguranca);
     }
 
     @Override

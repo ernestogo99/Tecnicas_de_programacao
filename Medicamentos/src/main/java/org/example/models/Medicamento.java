@@ -1,12 +1,16 @@
 package org.example.models;
 
-public abstract class Medicamento {
+import org.example.interfaces.IsSafety;
+
+public abstract class Medicamento implements IsSafety {
     private String nome;
     private int quantidade;
     private Number frequencia;
     private String unidadeDemedida;
+    private int grauDeSeguranca;
 
-    public Medicamento(String nome,int quantidade,Number frequencia,String unidadeDemedida){
+    public Medicamento(String nome,int quantidade,Number frequencia,String unidadeDemedida,int grauDeSeguranca){
+        this.grauDeSeguranca=grauDeSeguranca;
         this.nome=nome;
         this.quantidade=quantidade;
         this.frequencia=frequencia;
@@ -25,7 +29,10 @@ public abstract class Medicamento {
         this.nome = nome;
     }
 
-
+    @Override
+    public int grauDeseguranca() {
+        return this.grauDeSeguranca;
+    }
 
     public Number getFrequencia() {
         return frequencia;

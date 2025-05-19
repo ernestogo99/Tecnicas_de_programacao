@@ -3,8 +3,8 @@ package org.example.models;
 public class Injetaveis extends  Medicamento{
     private final String tipo="Injetável";
 
-    public Injetaveis(String nome,int quantidade,Number frequencia,String unidadeDemedida){
-        super(nome,quantidade,frequencia,unidadeDemedida);
+    public Injetaveis(String nome,int quantidade,Number frequencia,String unidadeDemedida,int grauDeseguranca){
+        super(nome,quantidade,frequencia,unidadeDemedida,grauDeseguranca);
     }
 
     @Override

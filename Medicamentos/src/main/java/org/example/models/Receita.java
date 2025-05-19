@@ -24,6 +24,10 @@ public class Receita {
         System.out.println("Médico :" + this.nomeMedico);
     }
 
+    public boolean contemMedicamento(Medicamento m){
+        return medicamentos.contains(m);
+    }
+
 
 
 

@@ -16,6 +16,7 @@ public class Main {
         banco.cadastrar(poupanca);
         ci.creditar(200);
         banco.cadastrar(ci);
+        System.out.println(ci.saldo());
 
         System.out.println(ci.saldo());
         banco.debitar("123", 100);

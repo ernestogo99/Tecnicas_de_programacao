@@ -1,0 +1,13 @@
+{
+  "name": "Ernesto",
+  "email": "e@gmail.com",
+  "age": 23,
+  "isDeveloper": true,
+  "userAdress": {
+    "street": "Main street",
+    "houseNumber": "42",
+    "city": "fortal",
+    "country": "brasil"
+  }
+}
+

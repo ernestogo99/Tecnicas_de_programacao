@@ -3,10 +3,12 @@ package org.example.repositorio;
 import java.util.Vector;
 
 import org.example.contas.ContaAbstrata;
+import org.example.exceptions.CIException;
+import org.example.exceptions.SIException;
 
 public class RepositorioContaVector implements IRepositorioContaVector {
 	private Vector<ContaAbstrata> contas=new Vector<ContaAbstrata>();
-	
+
 	
 	public void inserir(ContaAbstrata conta) {
 		if(conta==null) {
@@ -17,7 +19,7 @@ public class RepositorioContaVector implements IRepositorioContaVector {
 	}
 
 	
-	public void remover(String numero) {
+	public void remover(String numero) throws CIException {
 		ContaAbstrata conta=this.procurar(numero);
 		if(conta!=null) {
 			contas.remove(conta);
@@ -27,13 +29,13 @@ public class RepositorioContaVector implements IRepositorioContaVector {
 	}
 
 
-	public ContaAbstrata procurar(String numero) {
+	public ContaAbstrata procurar(String numero) throws CIException {
 		for(ContaAbstrata conta:contas) {
 			if(conta.numero().equals(numero)) {
 				return conta;
 			}
 		}
-		throw new RuntimeException("Conta com número: " + numero + " não encontrada.");
+		throw new CIException(numero);
 		
 	
 	}
@@ -63,6 +65,47 @@ public class RepositorioContaVector implements IRepositorioContaVector {
 		}
 		return this.contas.size();
 	}
+
+	public void creditar(String numero,double valor) throws CIException {
+		ContaAbstrata conta=this.procurar(numero);
+		if(conta!=null) {
+			conta.creditar(valor);
+		}
+	}
+
+	public void debitar(String numero,double valor) throws CIException,SIException {
+		ContaAbstrata conta=this.procurar(numero);
+		double saldoAtual=conta.saldo();
+		if(conta!=null && conta.saldo()>=valor) {
+			conta.debitar(valor);
+		}else{
+			throw  new SIException(saldoAtual,numero);
+		}
+
+	}
+
+	public double saldo(String numero) throws CIException {
+		ContaAbstrata conta=this.procurar(numero);
+		if(conta !=null) {
+			return conta.saldo();
+		}else {
+			return 0.0;
+		}
+	}
+
+	public void transferir(String origem,String destino,double valor) throws CIException,SIException {
+		ContaAbstrata origim=this.procurar(origem);
+		ContaAbstrata destiny=this.procurar(destino);
+
+		if(origim!=null && destiny!=null) {
+			origim.debitar(valor);
+			destiny.creditar(valor);
+			System.out.println("Foi transferido o valor de: "+valor+ " Da conta: "+origim.numero() + " para a conta: "+ destiny.numero());
+		}
+
+
+	}
+
 	
 
 }

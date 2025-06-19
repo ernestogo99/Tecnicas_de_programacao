@@ -17,6 +17,10 @@ public abstract class ContaAbstrata {
 	}
 	
 	public abstract void debitar(double valor);
+
+	public void renderJuros(Double taxa) {
+
+	}
 	
 	public String numero() {
 		return this.numero;

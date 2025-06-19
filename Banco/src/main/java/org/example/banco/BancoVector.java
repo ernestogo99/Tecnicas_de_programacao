@@ -3,6 +3,8 @@ import java.util.Vector;
 import org.example.contas.ContaAbstrata;
 import org.example.contas.ContaEspecial;
 import org.example.contas.Poupanca;
+import org.example.exceptions.CIException;
+import org.example.exceptions.SIException;
 import org.example.repositorio.RepositorioContaVector;
 
 public class BancoVector implements IBanco {
@@ -29,7 +31,7 @@ public class BancoVector implements IBanco {
 	public ContaAbstrata procurar(String numero) {
 		try{
 			return contas.procurar(numero);
-		}catch (RuntimeException e ){
+		}catch (CIException e ){
 			System.err.println(e.getMessage());
 			return null;
 		}
@@ -47,56 +49,57 @@ public class BancoVector implements IBanco {
 	}
 	
 	public void creditar(String numero,double valor) {
-		ContaAbstrata conta=this.procurar(numero);
-		if(conta!=null) {
-			conta.creditar(valor);
-		}else {
-			System.out.println("Conta não encontrada");
+		try{
+			contas.creditar(numero,valor);
+		} catch (CIException e) {
+			System.err.println(e.getMessage());
 		}
 	}
-	
+
 	public void debitar(String numero,double valor) {
-		ContaAbstrata conta=this.procurar(numero);
-		if(conta!=null) {
-			conta.debitar(valor);
-		}else {
-			System.out.println("Conta não encontrada");
+		try{
+			contas.debitar(numero,valor);
+		} catch (CIException e) {
+			System.err.println(e.getMessage());
+		} catch (SIException e) {
+			System.err.println(e.getMessage());
 		}
 	}
-	
+
 	public double saldo(String numero) {
-		ContaAbstrata conta=this.procurar(numero);
-		if(conta !=null) {
-			return conta.saldo();
-		}else {
+		try{
+			return contas.saldo(numero);
+		} catch (CIException e) {
+			System.err.println(e.getMessage());
 			return 0.0;
-		}	
-	}
-	
-	public void transferir(String origem,String destino,double valor) {
-		ContaAbstrata origim=this.procurar(origem);
-		ContaAbstrata destiny=this.procurar(destino);
-		if(origim!=null && destiny!=null) {
-			origim.debitar(valor);
-			destiny.creditar(valor);
-			System.out.println("Foi transferido o valor de: "+valor+ " Da conta: "+origim.numero() + " para a conta: "+ destiny.numero());
-		}else {
-			System.out.println("Alguma conta não existe");
 		}
-		
+	}
+
+	public void transferir(String origem,String destino,double valor) {
+		try{
+			contas.transferir(origem, destino, valor);
+		} catch (CIException e) {
+			System.err.println(e.getMessage());
+		} catch (SIException e) {
+			System.err.println(e.getMessage());
+		}
+
 		
 	}
-	
-	
-	
+
+	public void remover(String numero) {
+		try{
+			contas.remover(numero);
+		}catch (CIException e){
+			System.err.println(e.getMessage());
+		}
+	}
+
+
 	public void renderJuros(String numero) {
 		ContaAbstrata conta=this.procurar(numero);
-		
-		if(conta instanceof Poupanca) {
-				((Poupanca) conta).renderJuros(this.taxajuros);
-		}else {
-			System.err.println("A conta não é do tipo poupanca");
-		}
+		conta.renderJuros(this.taxajuros);
+
 	}
 	
 	public void renderBonus(String numero) {

@@ -11,5 +11,5 @@ public interface IBanco {
 	public void debitar(String numero,double valor);
 	public double saldo(String numero);
 	public void transferir(String origem,String destino,double valor);
-	
+	public void remover(String numero);
 }

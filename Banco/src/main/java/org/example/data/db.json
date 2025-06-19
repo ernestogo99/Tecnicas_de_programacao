@@ -1,0 +1,13 @@
+[
+  {
+    "numero": "456",
+    "saldo": 0.0,
+    "tipo": "Poupanca"
+  },
+  {
+    "bonus": 0.0,
+    "numero": "789",
+    "saldo": 0.0,
+    "tipo": "ContaEspecial"
+  }
+]

@@ -23,5 +23,13 @@ public class ContaEspecial extends Conta {
 		this.bonus=this.bonus +(valor * 0.01);
 		super.creditar(valor);
 	}
-	
+
+	@Override
+	public String toString() {
+		return "ContaEspecial{" +
+				"bonus=" + bonus +
+				", numero='" + numero + '\'' +
+				", saldo=" + saldo +
+				'}';
+	}
 }

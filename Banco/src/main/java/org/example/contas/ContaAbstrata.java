@@ -29,4 +29,12 @@ public abstract class ContaAbstrata {
 	public double saldo() {
 		return this.saldo;
 	}
+
+	@Override
+	public String toString() {
+		return "ContaAbstrata{" +
+				"numero='" + numero + '\'' +
+				", saldo=" + saldo +
+				'}';
+	}
 }

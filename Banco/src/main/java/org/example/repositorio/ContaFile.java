@@ -22,11 +22,10 @@ public class ContaFile implements IRepositorioContaVector {
     }
 
     @Override
-    public void inserir(ContaAbstrata conta)  {
+    public void inserir(ContaAbstrata conta)   {
         Vector<ContaAbstrata> contas =this.listar();
         contas.add(conta);
         this.Save(contas);
-
     }
 
     @Override

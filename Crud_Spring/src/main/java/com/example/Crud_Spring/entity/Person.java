@@ -11,6 +11,7 @@ import lombok.Setter;
 @Table(name = "tb_people")
 @Getter
 @Setter
+
 public class Person {
 
     @Id

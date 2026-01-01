@@ -1,5 +1,7 @@
 package com.example.nubank.model;
 
+import org.hibernate.annotations.OnDelete;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -25,5 +27,6 @@ public class Contatos {
     @ManyToOne
     @JoinColumn(name="cliente_id")
     @JsonBackReference
+    
     private Clientes clientes;
 }

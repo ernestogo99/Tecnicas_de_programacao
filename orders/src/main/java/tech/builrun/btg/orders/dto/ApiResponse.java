@@ -7,5 +7,6 @@ import java.util.Map;
 
 public record ApiResponse<T>(
         Map<String,Object> summary,
-        List<T> data,PaginationResponse paginationResponse) {
+        List<T> data,
+        PaginationResponse paginationResponse) {
 }
